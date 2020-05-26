@@ -1,0 +1,19 @@
+{
+  "name": "sudokumakeandsolve",
+  "version": "1.0.0",
+  "description": "A Sudoku Generator and Solver",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DasWelch/sudokuMakeandSolve.git"
+  },
+  "author": "Zachery Welch",
+  "license": "GNU GENERAL PUBLIC LICENSE",
+  "bugs": {
+    "url": "https://github.com/DasWelch/sudokuMakeandSolve/issues"
+  },
+  "homepage": "https://github.com/DasWelch/sudokuMakeandSolve#readme"
+}
