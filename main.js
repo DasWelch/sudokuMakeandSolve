@@ -12,6 +12,11 @@ function createBoard() {
   return board;
 }
 
+function simpleNaiveBoardGenerator(Board){
+  
+
+}
+
 function starterboard(a) {
   let k = 1;
   let n = 1;
@@ -55,4 +60,4 @@ function main() {
   console.log(createBoard());
 }
 
-main();
+main();// this is our program start 
