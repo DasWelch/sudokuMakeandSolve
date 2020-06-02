@@ -1,3 +1,18 @@
+const groups = {
+  group1: [ [0,0],[0,1],[0,2],
+            [1,0],[1,1],[1,2],
+            [2,0],[2,1],[2,2]
+          ],
+  group2: [ [0,3],[0,4],[0,5],
+            [1,3],[1,4],[1,5],
+            [2,3],[2,4],[2,5]
+          ],
+  group3: [ [0,6],[0,7],[0,8],
+            [1,6],[1,7],[1,8],
+            [2,6],[2,7],[2,8]
+         ],       
+  }
+
 function createBoard() {
   let board = new Array(9);
   for (let i = 0; i < board.length; i++) {
@@ -30,7 +45,11 @@ function NumberInCol(num, Board, j) {
   return false;
 }
 
-function NumberIn3x3(num, Board, i, j) {}
+function NumberIn3x3(num, Board, i, j) {
+
+
+
+}
 
 function simpleNaiveBoardGenerator(Board) {
   for (let i = 0; i < Board.length; i++) {
@@ -89,8 +108,9 @@ function main() {
   for(let i =0; i< board.length; i++){
     board[i][0] = 5;
     }
-  console.log(NumberInCol(5,board,1));
+  console.log(groups);
 
 }
 
 main(); // this is our program start
+
