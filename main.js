@@ -37,6 +37,12 @@ const groups = {
           ],
   }
 
+  function isBetween(n, a, b) {
+    let num = (n - a) * (n - b);
+    console.log(num);
+    return num <= 0;
+ }
+
 function createBoard() {
   let board = new Array(9);
   for (let i = 0; i < board.length; i++) {
@@ -51,34 +57,81 @@ function createBoard() {
   return board;
 }
 
-function NumberInRow(num, Board, i) {
-  for (let r = 0; r < Board[i].length; r++) {
-    if (num === Board[i][r]) {
+function NumberInRow(num, board, i) {
+  for (let r = 0; r < board[i].length; r++) {
+    if (num === board[i][r]) {
       return true;
     }
   }
   return false;
 }
 
-function NumberInCol(num, Board, j) {
-  for (let c = 0; c < Board.length; c++) {
-    if (num === Board[c][j]) {
+function NumberInCol(num, board, j) {
+  for (let c = 0; c < board.length; c++) {
+    if (num === board[c][j]) {
       return true;
     }
   }
   return false;
 }
 
-function NumberIn3x3(num, Board, i, j) {
+function check3x3(num,board,group){
 
+  for (let r = 0; r < group.length; r++) {
+    groupi = group[r][0]
+    groupj = group[r][1]
+
+    console.log(groupi +', '+groupj);
+
+    if (num === board[groupi][groupj]) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function NumberIn3x3(num, board, i, j) {
+  if(isBetween(i,0,2))
+  {
+    if(isBetween(j,0,2)){
+
+    }
+    else if(isBetween(j,3,5)){
   
+    }
+    else{
+      
+    }
+  }
 
+  else if(isBetween(i,3,5)){
+    if(isBetween(j,0,2)){
 
+    }
+    else if(isBetween(j,3,5)){
+  
+    }
+    else{
+      
+    }
+  }
+
+  else{
+    if(isBetween(j,0,2)){
+
+    }
+    else if(isBetween(j,3,5)){
+  
+    }
+    else{
+      
+    }
+  }
 }
 
-function simpleNaiveBoardGenerator(Board) {
-  for (let i = 0; i < Board.length; i++) {
-    for (let j = 0; j < Board[i].length; j++) {
+function simpleNaiveBoardGenerator(board) {
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[i].length; j++) {
       let numWorks = false;
       while (!numWorks) {
         let numberForCell = Math.floor(Math.random() * (10 - 1)) + 1; // gives us 1 to 9 for random numbers
@@ -128,12 +181,11 @@ function starterboard(a) {
 //this is the main. made it to help my C# brain work in javascript better
 function main() {
   let board = createBoard();
-  
-  //board[0] = [5, 5, 5, 5, 5, 5, 5, 5, 5];
-  for(let i =0; i< board.length; i++){
-    board[i][0] = 5;
-    }
-  console.log(groups);
+
+  console.log(check3x3(0,board,groups.group0));
+
+  //console.log(groups.group0);
+
 
 }
 
