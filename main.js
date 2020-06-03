@@ -1,47 +1,110 @@
 const groups = {
-  group0: [ [0,0],[0,1],[0,2],
-            [1,0],[1,1],[1,2],
-            [2,0],[2,1],[2,2]
-          ],
-  group1: [ [0,3],[0,4],[0,5],
-            [1,3],[1,4],[1,5],
-            [2,3],[2,4],[2,5]
-          ],
-  group2: [ [0,6],[0,7],[0,8],
-            [1,6],[1,7],[1,8],
-            [2,6],[2,7],[2,8]
-          ],
-  group3: [ [3,0],[3,1],[3,2],
-            [4,0],[4,1],[4,2],
-            [5,0],[5,1],[5,2]
-          ],
-  group4: [ [3,3],[3,4],[3,5],
-            [4,3],[4,4],[4,5],
-            [5,3],[5,4],[5,5]
-          ],
-  group5: [ [3,6],[3,7],[3,8],
-            [4,6],[4,7],[4,8],
-            [5,6],[5,7],[5,8]
-          ],
-  group6: [ [6,0],[6,1],[6,2],
-            [7,0],[7,1],[7,2],
-            [8,0],[8,1],[8,2]
-          ],
-  group7: [ [6,3],[6,4],[6,5],
-            [7,3],[7,4],[7,5],
-            [8,3],[8,4],[8,5]
-          ],
-  group8: [ [6,6],[6,7],[6,8],
-            [7,6],[7,7],[7,8],
-            [8,6],[8,7],[8,8]
-          ],
-  }
+  group0: [
+    [0, 0],
+    [0, 1],
+    [0, 2],
+    [1, 0],
+    [1, 1],
+    [1, 2],
+    [2, 0],
+    [2, 1],
+    [2, 2],
+  ],
+  group1: [
+    [0, 3],
+    [0, 4],
+    [0, 5],
+    [1, 3],
+    [1, 4],
+    [1, 5],
+    [2, 3],
+    [2, 4],
+    [2, 5],
+  ],
+  group2: [
+    [0, 6],
+    [0, 7],
+    [0, 8],
+    [1, 6],
+    [1, 7],
+    [1, 8],
+    [2, 6],
+    [2, 7],
+    [2, 8],
+  ],
+  group3: [
+    [3, 0],
+    [3, 1],
+    [3, 2],
+    [4, 0],
+    [4, 1],
+    [4, 2],
+    [5, 0],
+    [5, 1],
+    [5, 2],
+  ],
+  group4: [
+    [3, 3],
+    [3, 4],
+    [3, 5],
+    [4, 3],
+    [4, 4],
+    [4, 5],
+    [5, 3],
+    [5, 4],
+    [5, 5],
+  ],
+  group5: [
+    [3, 6],
+    [3, 7],
+    [3, 8],
+    [4, 6],
+    [4, 7],
+    [4, 8],
+    [5, 6],
+    [5, 7],
+    [5, 8],
+  ],
+  group6: [
+    [6, 0],
+    [6, 1],
+    [6, 2],
+    [7, 0],
+    [7, 1],
+    [7, 2],
+    [8, 0],
+    [8, 1],
+    [8, 2],
+  ],
+  group7: [
+    [6, 3],
+    [6, 4],
+    [6, 5],
+    [7, 3],
+    [7, 4],
+    [7, 5],
+    [8, 3],
+    [8, 4],
+    [8, 5],
+  ],
+  group8: [
+    [6, 6],
+    [6, 7],
+    [6, 8],
+    [7, 6],
+    [7, 7],
+    [7, 8],
+    [8, 6],
+    [8, 7],
+    [8, 8],
+  ],
+};
 
-  function isBetween(n, a, b) {
-    let num = (n - a) * (n - b);
-    console.log(num);
-    return num <= 0;
- }
+function isBetween(n, a, b) {
+  let num = (n - a) * (n - b);
+  console.log(num);
+  return num <= 0;
+}
 
 function createBoard() {
   let board = new Array(9);
@@ -75,13 +138,12 @@ function NumberInCol(num, board, j) {
   return false;
 }
 
-function check3x3(num,board,group){
-
+function check3x3(num, board, group) {
   for (let r = 0; r < group.length; r++) {
-    groupi = group[r][0]
-    groupj = group[r][1]
+    groupi = group[r][0];
+    groupj = group[r][1];
 
-    console.log(groupi +', '+groupj);
+    //console.log(groupi +', '+groupj);
 
     if (num === board[groupi][groupj]) {
       return true;
@@ -91,40 +153,29 @@ function check3x3(num,board,group){
 }
 
 function NumberIn3x3(num, board, i, j) {
-  if(isBetween(i,0,2))
-  {
-    if(isBetween(j,0,2)){
-
+  if (isBetween(i, 0, 2)) {
+    if (isBetween(j, 0, 2)) {
+      check3x3(num, board, groups.group0)
+    } else if (isBetween(j, 3, 5)) {
+      check3x3(num, board, groups.group1)
+    } else {
+      check3x3(num, board, groups.group2)
     }
-    else if(isBetween(j,3,5)){
-  
+  } else if (isBetween(i, 3, 5)) {
+    if (isBetween(j, 0, 2)) {
+      check3x3(num, board, groups.group3)
+    } else if (isBetween(j, 3, 5)) {
+      check3x3(num, board, groups.group4)
+    } else {
+      check3x3(num, board, groups.group5)
     }
-    else{
-      
-    }
-  }
-
-  else if(isBetween(i,3,5)){
-    if(isBetween(j,0,2)){
-
-    }
-    else if(isBetween(j,3,5)){
-  
-    }
-    else{
-      
-    }
-  }
-
-  else{
-    if(isBetween(j,0,2)){
-
-    }
-    else if(isBetween(j,3,5)){
-  
-    }
-    else{
-      
+  } else {
+    if (isBetween(j, 0, 2)) {
+      check3x3(num, board, groups.group6)
+    } else if (isBetween(j, 3, 5)) {
+      check3x3(num, board, groups.group7)
+    } else {
+      check3x3(num, board, groups.group8)
     }
   }
 }
@@ -182,12 +233,9 @@ function starterboard(a) {
 function main() {
   let board = createBoard();
 
-  console.log(check3x3(0,board,groups.group0));
+  console.log(check3x3(0, board, groups.group0));
 
   //console.log(groups.group0);
-
-
 }
 
 main(); // this is our program start
-
