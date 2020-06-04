@@ -102,7 +102,6 @@ const groups = {
 
 function isBetween(n, a, b) {
   let num = (n - a) * (n - b);
-  console.log(num);
   return num <= 0;
 }
 
@@ -155,27 +154,27 @@ function check3x3(num, board, group) {
 function NumberIn3x3(num, board, i, j) {
   if (isBetween(i, 0, 2)) {
     if (isBetween(j, 0, 2)) {
-      check3x3(num, board, groups.group0)
+      return check3x3(num, board, groups.group0);
     } else if (isBetween(j, 3, 5)) {
-      check3x3(num, board, groups.group1)
+      return check3x3(num, board, groups.group1);
     } else {
-      check3x3(num, board, groups.group2)
+      return check3x3(num, board, groups.group2);
     }
   } else if (isBetween(i, 3, 5)) {
     if (isBetween(j, 0, 2)) {
-      check3x3(num, board, groups.group3)
+      return check3x3(num, board, groups.group3);
     } else if (isBetween(j, 3, 5)) {
-      check3x3(num, board, groups.group4)
+      return check3x3(num, board, groups.group4);
     } else {
-      check3x3(num, board, groups.group5)
+      return check3x3(num, board, groups.group5);
     }
   } else {
     if (isBetween(j, 0, 2)) {
-      check3x3(num, board, groups.group6)
+      return check3x3(num, board, groups.group6);
     } else if (isBetween(j, 3, 5)) {
-      check3x3(num, board, groups.group7)
+      return check3x3(num, board, groups.group7);
     } else {
-      check3x3(num, board, groups.group8)
+      return check3x3(num, board, groups.group8);
     }
   }
 }
@@ -185,10 +184,22 @@ function simpleNaiveBoardGenerator(board) {
     for (let j = 0; j < board[i].length; j++) {
       let numWorks = false;
       while (!numWorks) {
-        let numberForCell = Math.floor(Math.random() * (10 - 1)) + 1; // gives us 1 to 9 for random numbers
-        if (true) {
+        let num = Math.floor(Math.random() * (10 - 1)) + 1; // gives us 1 to 9 for random numbers
+        if (
+          !NumberInRow(num, board, i) &&
+          !NumberInCol(num, board, j) &&
+          !NumberIn3x3(num, board, i, j)
+        ) {
           numWorks = true;
+          board[i][j] = num;
+          console.log('board['+ i +']['+j+']' + '= '+ board[i][j]);
+          console.table(board);
         }
+        else if(i === 8 || j === 8){
+          let missingi = 0 
+          for(i)
+        }
+        //else we just loop
       }
     }
   }
@@ -233,7 +244,9 @@ function starterboard(a) {
 function main() {
   let board = createBoard();
 
-  console.log(check3x3(0, board, groups.group0));
+  simpleNaiveBoardGenerator(board);
+
+  console.table(board);
 
   //console.log(groups.group0);
 }
