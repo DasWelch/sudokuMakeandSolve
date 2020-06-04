@@ -183,8 +183,10 @@ function simpleNaiveBoardGenerator(board) {
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[i].length; j++) {
       let numWorks = false;
+      let num = Math.floor(Math.random() * (10 - 1)) + 1; // gives us 1 to 9 for random numbers
+      let lastInRow = 1;
       while (!numWorks) {
-        let num = Math.floor(Math.random() * (10 - 1)) + 1; // gives us 1 to 9 for random numbers
+        //console.log("num is: " + num);
         if (
           !NumberInRow(num, board, i) &&
           !NumberInCol(num, board, j) &&
@@ -192,17 +194,30 @@ function simpleNaiveBoardGenerator(board) {
         ) {
           numWorks = true;
           board[i][j] = num;
-          console.log('board['+ i +']['+j+']' + '= '+ board[i][j]);
+          lastInRow = 1;
+          console.log("board[" + i + "][" + j + "]" + "= " + board[i][j]);
           console.table(board);
-        }
-        else if(i === 8 || j === 8){
-          let missingi = 0 
-          for(i)
-          for(i)
+        } else if (j === 8) {
+          num = lastInRow;
+          if (lastInRow >= 10) {
+            return false;
+          } else {
+            lastInRow++;
+          }
+        } else {
+          num = Math.floor(Math.random() * (10 - 1)) + 1;
         }
         //else we just loop
       }
     }
+  }
+}
+
+function startNaiveBoardGen() {
+  let boardDone = false;
+  while (!boardDone) {
+    let board = createBoard();
+    boardDone = simpleNaiveBoardGenerator(board);
   }
 }
 
@@ -243,13 +258,7 @@ function starterboard(a) {
 
 //this is the main. made it to help my C# brain work in javascript better
 function main() {
-  let board = createBoard();
-
-  simpleNaiveBoardGenerator(board);
-
-  console.table(board);
-
-  //console.log(groups.group0);
+  startNaiveBoardGen();
 }
 
 main(); // this is our program start
