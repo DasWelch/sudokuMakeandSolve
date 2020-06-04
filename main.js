@@ -198,6 +198,7 @@ function simpleNaiveBoardGenerator(board) {
         else if(i === 8 || j === 8){
           let missingi = 0 
           for(i)
+          for(i)
         }
         //else we just loop
       }
