@@ -153,8 +153,6 @@ function swapCols(board, colA, colB) {
     }
   }
 
-  console.table(board)
-
   return board;
 }
 
@@ -212,8 +210,7 @@ function starterboard(board) {
 function main() {
   let board = createBoard();
   console.table(board);
-  swapCols(board, 0, 3);
-  //console.table(swapRows(board, 0, 6));
+  swapCols(board, 3, 6);
 }
 
 main(); // this is our program start
