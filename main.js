@@ -1,124 +1,11 @@
-const groups = {
-  group0: [
-    [0, 0],
-    [0, 1],
-    [0, 2],
-    [1, 0],
-    [1, 1],
-    [1, 2],
-    [2, 0],
-    [2, 1],
-    [2, 2],
-  ],
-  group1: [
-    [0, 3],
-    [0, 4],
-    [0, 5],
-    [1, 3],
-    [1, 4],
-    [1, 5],
-    [2, 3],
-    [2, 4],
-    [2, 5],
-  ],
-  group2: [
-    [0, 6],
-    [0, 7],
-    [0, 8],
-    [1, 6],
-    [1, 7],
-    [1, 8],
-    [2, 6],
-    [2, 7],
-    [2, 8],
-  ],
-  group3: [
-    [3, 0],
-    [3, 1],
-    [3, 2],
-    [4, 0],
-    [4, 1],
-    [4, 2],
-    [5, 0],
-    [5, 1],
-    [5, 2],
-  ],
-  group4: [
-    [3, 3],
-    [3, 4],
-    [3, 5],
-    [4, 3],
-    [4, 4],
-    [4, 5],
-    [5, 3],
-    [5, 4],
-    [5, 5],
-  ],
-  group5: [
-    [3, 6],
-    [3, 7],
-    [3, 8],
-    [4, 6],
-    [4, 7],
-    [4, 8],
-    [5, 6],
-    [5, 7],
-    [5, 8],
-  ],
-  group6: [
-    [6, 0],
-    [6, 1],
-    [6, 2],
-    [7, 0],
-    [7, 1],
-    [7, 2],
-    [8, 0],
-    [8, 1],
-    [8, 2],
-  ],
-  group7: [
-    [6, 3],
-    [6, 4],
-    [6, 5],
-    [7, 3],
-    [7, 4],
-    [7, 5],
-    [8, 3],
-    [8, 4],
-    [8, 5],
-  ],
-  group8: [
-    [6, 6],
-    [6, 7],
-    [6, 8],
-    [7, 6],
-    [7, 7],
-    [7, 8],
-    [8, 6],
-    [8, 7],
-    [8, 8],
-  ],
-};
+import { groups } from "./groups.js";
 
 function isBetween(n, a, b) {
   let num = (n - a) * (n - b);
   return num <= 0;
 }
 
-function createBoard() {
-  let board = new Array(9);
-  for (let i = 0; i < board.length; i++) {
-    board[i] = new Array(9);
-    for (let j = 0; j < board[i].length; j++) {
-      board[i][j] = 0;
-    }
-  }
-
-  //board = starterboard(board);
-
-  return board;
-}
-
+// checks if number already exits in the row
 function NumberInRow(num, board, i) {
   for (let r = 0; r < board[i].length; r++) {
     if (num === board[i][r]) {
@@ -127,7 +14,7 @@ function NumberInRow(num, board, i) {
   }
   return false;
 }
-
+// checks if number alread exits in column
 function NumberInCol(num, board, j) {
   for (let c = 0; c < board.length; c++) {
     if (num === board[c][j]) {
@@ -137,6 +24,7 @@ function NumberInCol(num, board, j) {
   return false;
 }
 
+// checks if number alread exits in 3x3 section of board. checks one
 function check3x3(num, board, group) {
   for (let r = 0; r < group.length; r++) {
     groupi = group[r][0];
@@ -151,6 +39,7 @@ function check3x3(num, board, group) {
   return false;
 }
 
+// checks for numbers that work in each 3x3 section of the board. checks all
 function NumberIn3x3(num, board, i, j) {
   if (isBetween(i, 0, 2)) {
     if (isBetween(j, 0, 2)) {
@@ -179,49 +68,112 @@ function NumberIn3x3(num, board, i, j) {
   }
 }
 
-function simpleNaiveBoardGenerator(board) {
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[i].length; j++) {
-      let numWorks = false;
-      let num = Math.floor(Math.random() * (10 - 1)) + 1; // gives us 1 to 9 for random numbers
-      let lastInRow = 1;
-      while (!numWorks) {
-        //console.log("num is: " + num);
-        if (
-          !NumberInRow(num, board, i) &&
-          !NumberInCol(num, board, j) &&
-          !NumberIn3x3(num, board, i, j)
-        ) {
-          numWorks = true;
-          board[i][j] = num;
-          lastInRow = 1;
-          console.log("board[" + i + "][" + j + "]" + "= " + board[i][j]);
-          console.table(board);
-        } else if (j === 8) {
-          num = lastInRow;
-          if (lastInRow >= 10) {
-            return false;
-          } else {
-            lastInRow++;
-          }
-        } else {
-          num = Math.floor(Math.random() * (10 - 1)) + 1;
-        }
-        //else we just loop
-      }
+// function simpleNaiveBoardGenerator(board) {
+//   for (let i = 0; i < board.length; i++) {
+//     for (let j = 0; j < board[i].length; j++) {
+//       let numWorks = false;
+//       let num = Math.floor(Math.random() * (10 - 1)) + 1; // gives us 1 to 9 for random numbers
+//       let lastInRow = 1;
+//       while (!numWorks) {
+//         //console.log("num is: " + num);
+//         if (
+//           !NumberInRow(num, board, i) &&
+//           !NumberInCol(num, board, j) &&
+//           !NumberIn3x3(num, board, i, j)
+//         ) {
+//           numWorks = true;
+//           board[i][j] = num;
+//           lastInRow = 1;
+//           console.log("board[" + i + "][" + j + "]" + "= " + board[i][j]);
+//           console.table(board);
+//         } else if (j === 8) {
+//           num = lastInRow;
+//           if (lastInRow >= 10) {
+//             return false;
+//           } else {
+//             lastInRow++;
+//           }
+//         } else {
+//           num = Math.floor(Math.random() * (10 - 1)) + 1;
+//         }
+//         //else we just loop
+//       }
+//     }
+//   }
+// }
+
+// function startNaiveBoardGen() {
+//   let boardDone = false;
+//   while (!boardDone) {
+//     let board = createBoard();
+//     boardDone = simpleNaiveBoardGenerator(board);
+//   }
+// }
+
+// rowA is the Starting row for the first group of 3 you would like to swap
+// rowB is the starting row for the second group you would like to swap
+function swapRows(board, rowA, rowB) {
+  const temp = [board[rowA], board[rowA + 1], board[rowA + 2]];
+  board[rowA] = board[rowB];
+  board[rowA + 1] = board[rowB + 1];
+  board[rowA + 2] = board[rowB + 2];
+
+  board[rowB] = temp[0];
+  board[rowB + 1] = temp[1];
+  board[rowB + 2] = temp[2];
+
+  return board;
+}
+
+function swapCols(board, colA, colB) {
+  let temp = [];
+// feel like this can be more efficient
+  for (let cols = 0; cols < 3; cols++) {
+    let tempcol= []
+    for (let i = 0; i < board.length; i++) {
+      tempcol[i] = board[i][colA + cols];
+    }
+    temp[cols] = tempcol
+  }
+
+  console.table(board);
+  
+  for (let cols = 0; cols < 3; cols++) {
+    let addcol = colB+cols
+    console.log("addcol " + addcol)
+    for (let i = 0; i < board.length; i++) {
+      board[i][colA + cols] = board[i][addcol];
     }
   }
-}
 
-function startNaiveBoardGen() {
-  let boardDone = false;
-  while (!boardDone) {
-    let board = createBoard();
-    boardDone = simpleNaiveBoardGenerator(board);
+  console.table(temp)
+  for (let cols = 0; cols < 3; cols++) {
+    for (let i = 0; i < temp.length; i++) {
+      board[i][colB + cols] = temp[i][cols];
+    }
   }
+
+  console.table(board)
+
+  return board;
 }
 
-function starterboard(a) {
+function createBoard() {
+  let board = new Array(9);
+  for (let i = 0; i < board.length; i++) {
+    board[i] = new Array(9);
+    for (let j = 0; j < board[i].length; j++) {
+      board[i][j] = 0;
+    }
+  }
+
+  board = starterboard(board);
+
+  return board;
+}
+
+// adds numbers to the board and creates a starting board that can be transmuted to get a working sudoku board
+function starterboard(board) {
   let k = 1;
   let n = 1;
 
@@ -232,15 +184,15 @@ function starterboard(a) {
       //this loop draws each line
 
       if (k <= 9) {
-        a[i][j] = k;
+        board[i][j] = k;
         k++;
       } else {
         k = 1;
-        a[i][j] = k;
+        board[i][j] = k;
         k++;
       }
     }
-    console.log("n is " + n + " and k is " + k);
+    //console.log("n is " + n + " and k is " + k);
     //more code here
     n = k + 3;
 
@@ -253,12 +205,15 @@ function starterboard(a) {
       n = (n % 9) + 1;
     }
   }
-  return a;
+  return board;
 }
 
 //this is the main. made it to help my C# brain work in javascript better
 function main() {
-  startNaiveBoardGen();
+  let board = createBoard();
+  console.table(board);
+  swapCols(board, 0, 3);
+  //console.table(swapRows(board, 0, 6));
 }
 
 main(); // this is our program start
